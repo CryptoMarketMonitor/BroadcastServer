@@ -1,0 +1,23 @@
+{
+  "name": "BroadcastServer",
+  "version": "0.0.0",
+  "description": "Broadcasts cryptocurrency market data for consumption by client side applications.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CryptoMarketMonitor/BroadcastServer.git"
+  },
+  "author": "Daniel Streit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CryptoMarketMonitor/BroadcastServer/issues"
+  },
+  "homepage": "https://github.com/CryptoMarketMonitor/BroadcastServer",
+  "dependencies": {
+    "socket.io": "^1.1.0",
+    "socket.io-client": "^1.1.0"
+  }
+}
