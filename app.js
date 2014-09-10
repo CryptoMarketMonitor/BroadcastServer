@@ -9,83 +9,56 @@ server.listen(port, function() {
 });
 
 ////////////////////
-// Channels
+// Channels       //
 ////////////////////
 
 // Trades
-// Data format:
-// {
-//     exchange: String,
-//     date: Date,
-//     price: Number,
-//     amount: Number,
-//     currency: 'BTC',
-//     tCurrency: 'USD',
-//     exchangeTradeID: String
-// }
-var ioClient = require('socket.io-client');
-var tradeListener = ioClient(tradeListenerUrl);
+var tradeListener = require('socket.io-client')(tradeListenerUrl);
 tradeListener.on('trade', function(data) {
-  console.log(data);
   io.of('/BTC/USD/trades').emit('trade', data);
 });
 
 // Volatility
-// Data format:
-// {
-//     volatility: Number,
-//     percentile: Number,
-//     average: Number,
-//     high: Number,
-//     low: Number
-// }
-// io.of('/BTC/USD/volatility').emit('update', data);
+var varianceData = require('./db/varianceData');
+varianceData.on('update', function(data) {
+  io.of('/BTC/USD/volatility').emit('update', data);
+});
+io.of('BTC/USD/volatility').on('connection', function(socket) {
+  socket.emit('update', varianceData.get());
+});
 
 // Volume
-// Data format:
-// {
-//     volume: Number,
-//     percentile: Number,
-//     average: Number,
-//     high: Number,
-//     low: Number
-// }
-// io.of('/BTC/USC/volume').emit('update', data);
+var volumeData = require('./db/volumeData');
+volumeData.on('update', function(data) {
+  io.of('/BTC/USD/volume').emit('update', data);
+});
+io.of('/BTC/USD/volume').on('connection', function(socket) {
+  socket.emit('update', volumeData.get());
+});
 
-// Volume Weighted Average Price
-// Data format:
-// {
-//     vwap: Number,
-//     change: Number,
-// }
-// io.of('/BTC/USD/vwap').emit('update', data);
+// Summary Data
+var summaryData = require('./db/summaryData');
+summaryData.on('update', function(data) {
+  io.of('BTC/USD/summary').emit('update', data);
+});
+io.of('BTC/USD/summary').on('connection', function(socket) {
+  socket.emit('update', summaryData.get());
+});
 
 // Range
-// Data format:
-// {
-//     range: Number, // as a percentage
-//     percentile: Number,
-//     average: Number,
-//     high: Number,
-//     low: Number
-// }
-// io.of('/BTC/USD/range').emit('update', data);
+var rangeData = require('./db/rangeData');
+rangeData.on('update', function(data) {
+  io.of('BTC/USD/range').emit('update', data);
+});
+io.of('BTC/USD/range').on('connection', function(socket) {
+  socket.emit('update', rangeData.get());
+});
 
-// New High/Low/stable
-// This component would have one of four states
-// If a new 24 hour high has been made in the last
-// 24 hours: 'Trending Up'
-// If a new 24 hour low has been made in the last
-// 24 hours: 'Trending Down'
-// If both: 'Open Range' // Find a proper name for this
-// If neither: 'Range Bound'
-// Data format:
-// {
-//     state: String
-// }
-// io.of('/BTC/USD/trend').emit('update', data);
-
-// To be included:
-// channels for various charts
-
-
+// Price Distribution
+var priceDistribution = require('./db/priceDistribution');
+priceDistribution.on('update', function(data) {
+  io.of('BTC/USD/priceDistribution').emit('update', data);
+});
+io.of('BTC/USD/priceDistribution').on('connection', function(socket) {
+  socket.emit('update', priceDistribution.get());
+});
