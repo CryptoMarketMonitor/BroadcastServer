@@ -13,9 +13,9 @@ Socket.io Channels
 
 ----------
 
-Trades
-**/BTC/USD/trades**
-Event: 'trade'
+Trades<br />
+**/BTC/USD/trades**<br />
+Event: 'trade'<br />
 Data Format:
 
     {
@@ -29,9 +29,9 @@ Data Format:
     }
  
 ----------
-Market Summary Statistics
-**/BTC/USD/summary**
-Event: 'update'
+Market Summary Statistics<br />
+**/BTC/USD/summary**<br />
+Event: 'update'<br />
 Data Format:
 
     {
@@ -48,9 +48,9 @@ Data Format:
 ----------
 
 
-Volatility Details
-**/BTC/USD/volatility**
-Event: 'update'
+Volatility Details<br />
+**/BTC/USD/volatility**<br />
+Event: 'update'<br />
 Data Format:
 
     {
@@ -65,9 +65,9 @@ Data Format:
 ----------
 
 
-Range Details
-**/BTC/USD/range**
-Event: 'update'
+Range Details<br />
+**/BTC/USD/range**<br />
+Event: 'update'<br />
 Data Format:
 
     {
@@ -82,9 +82,9 @@ Data Format:
 ----------
 
 
-Volume Details
-**/BTC/USD/volume**
-Event: 'update'
+Volume Details<br />
+**/BTC/USD/volume**<br />
+Event: 'update'<br />
 Data Format:
 
     {
@@ -99,9 +99,9 @@ Data Format:
 ----------
 
 
-Price Distribution Chart Data
-**/BTC/USD/priceDistribution**
-Event: 'update'
+Price Distribution Chart Data<br />
+**/BTC/USD/priceDistribution**<br />
+Event: 'update'<br />
 Data Format:
 
     // An array of datapoints
