@@ -112,7 +112,7 @@ Data Format:
         volume: Number
       },
       ...
-  ]
+    ]
 
 
 ----------
@@ -125,10 +125,9 @@ Include Socket.io:
     <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
     
 
+Then:
 
-----------
-
-  <script>
+    <script>
       var trade = io('http://broadcastserver.azurewebsites.net/BTC/USD/trades');
       trade.on('trade', function(trade) {
         console.log('Trade:', trade);
