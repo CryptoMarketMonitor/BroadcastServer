@@ -39,7 +39,7 @@ Data Format:
       volume: Number,
       high: Number,
       low: Number,
-      volatility: Number,
+      variance: Number,
       range: Number,
       numTrades: Number
     }
