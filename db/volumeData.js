@@ -1,6 +1,6 @@
 // Module variables
 var timeframe = 24*60*60*1000; // Calculate volatility over the last 24 hours
-var since = new Date(Date.now() - timeframe);
+var since;
 var updatePeriod = 30*1000; // Fetch new data every 30 seconds
 var data = {}; // The data object that will be returned
 
@@ -17,21 +17,23 @@ var VolumeDataCollection = mongoose.model('VolumeData',
   new mongoose.Schema({}), 
   'VolumeData');
 
-// Set up aggregation pipeline
-var pipe = [];
-
-pipe.push({ 
-  $match : { date : { $gt : since } }
-});
-
-pipe.push({
-  $group: {
-    _id: null,
-    volume: { $sum: "$amount" }
-  }
-});
-
 var getVolumeData = function() {
+  since = new Date(Date.now() - timeframe);
+  
+  // Set up aggregation pipeline
+  var pipe = [];
+
+  pipe.push({ 
+    $match : { date : { $gt : since } }
+  });
+
+  pipe.push({
+    $group: {
+      _id: null,
+      volume: { $sum: "$amount" }
+    }
+  });
+
   Trade
     .aggregate(pipe)
     .exec()

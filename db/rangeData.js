@@ -1,6 +1,6 @@
 // Module variables
 var timeframe = 24*60*60*1000; // Calculate volatility over the last 24 hours
-var since = new Date(Date.now() - timeframe);
+var since;
 var updatePeriod = 30*1000; // Fetch new data every 30 seconds
 var data = {}; // The data object that will be returned
 
@@ -13,32 +13,34 @@ var RangeDataCollection = db.mongoose.model('RangeData',
   new db.mongoose.Schema({}),
   'RangeData');
 
-// Set up aggregation pipeline
-var pipe = [];
-
-pipe.push({
-  $match: { date: { $gt: since }}
-});
-
-pipe.push({
-  $group: {
-    _id: null,
-    high: { $max: "$price" },
-    low: { $min: "$price" },
-  }
-});
-
-pipe.push({
-  $project: {
-    _id: 0,
-    range: { $divide: [
-      { $subtract: ["$high", "$low"] },
-      "$low"  
-    ]}
-  }
-});
-
 var getRangeData = function() {
+  since = new Date(Date.now() - timeframe);
+  
+  // Set up aggregation pipeline
+  var pipe = [];
+
+  pipe.push({
+    $match: { date: { $gt: since }}
+  });
+
+  pipe.push({
+    $group: {
+      _id: null,
+      high: { $max: "$price" },
+      low: { $min: "$price" },
+    }
+  });
+
+  pipe.push({
+    $project: {
+      _id: 0,
+      range: { $divide: [
+        { $subtract: ["$high", "$low"] },
+        "$low"  
+      ]}
+    }
+  });
+
   db
     .Trade
     .aggregate(pipe)
