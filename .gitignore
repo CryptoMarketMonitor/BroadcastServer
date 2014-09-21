@@ -2,6 +2,11 @@
 logs
 *.log
 
+# DB config
+dbConfig.js
+
+.DS_Store
+
 # Runtime data
 pids
 *.pid

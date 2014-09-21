@@ -62,3 +62,12 @@ priceDistribution.on('update', function(data) {
 io.of('BTC/USD/priceDistribution').on('connection', function(socket) {
   socket.emit('update', priceDistribution.get());
 });
+
+// One Minute Price Chart
+var oneMinutePriceChart = require('./db/priceCharts/oneMinute');
+oneMinutePriceChart.on('update', function(data) {
+  io.of('BTC/USD/priceCharts/oneMinute').emit('update', data);
+});
+io.of('BTC/USD/priceCharts/oneMinute').on('connection', function(socket) {
+  socket.emit('update', oneMinutePriceChart.get());
+});

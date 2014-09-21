@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URI);
+var mongoUri = process.env.MONGO_URI || require('./dbConfig').MONGO_URI;
+mongoose.connect(mongoUri);
 var connection = mongoose.connection;
 var Trade = mongoose.model('Trade', 
   new mongoose.Schema({}),
