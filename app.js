@@ -2,6 +2,7 @@ var tradeListenerUrl = 'http://QuoteServer.azurewebsites.net:80';
 
 // Set up server
 var port = process.env.PORT || 3000;
+var url = require('url');
 var server = require('http').Server();
 var io = require('socket.io')(server);
 server.listen(port, function() {
@@ -63,11 +64,15 @@ io.of('BTC/USD/priceDistribution').on('connection', function(socket) {
   socket.emit('update', priceDistribution.get());
 });
 
-// One Minute Price Chart
-var oneMinutePriceChart = require('./db/priceCharts/oneMinute');
-oneMinutePriceChart.on('update', function(data) {
-  io.of('BTC/USD/priceCharts/oneMinute').emit('update', data);
-});
-io.of('BTC/USD/priceCharts/oneMinute').on('connection', function(socket) {
-  socket.emit('update', oneMinutePriceChart.get());
-});
+// Price Charts
+var priceCharts = require('./db/priceCharts/priceCharts');
+for (var chart in priceCharts) {
+  var path = 'BTC/USD/priceCharts/';
+  priceCharts[chart].on('update', function(data) {
+    io.of(path + this).emit('update', data);
+  }.bind(chart));
+  io.of(path + chart).on('connection', function(socket) {
+    socket.emit('update', priceCharts[this].get());
+  }.bind(chart));
+}
+
