@@ -78,7 +78,7 @@ PriceChart.prototype.getData = function() {
       for (var i = 0; i < context.data.length; i++) {
         context.data[i].date = new Date(Date.UTC(
                             context.data[i]._id.year,
-                            context.data[i]._id.month, 
+                            context.data[i]._id.month - 1, 
                             context.data[i]._id.day,
                             context.data[i]._id.hour,
                             context.data[i]._id.minute
