@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CryptoMarketMonitor/BroadcastServer",
   "dependencies": {
+    "lodash": "^2.4.1",
     "mongoose": "^3.8.16",
     "socket.io": "^1.1.0",
     "socket.io-client": "^1.1.0"

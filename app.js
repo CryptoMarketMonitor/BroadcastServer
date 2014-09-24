@@ -20,20 +20,22 @@ tradeListener.on('trade', function(data) {
 });
 
 // Volatility
-var varianceData = require('./db/varianceData');
-varianceData.on('update', function(data) {
-  io.of('/BTC/USD/volatility').emit('update', data);
-});
-io.of('BTC/USD/volatility').on('connection', function(socket) {
-  socket.emit('update', varianceData.get());
-});
+var volatility = require('./db/volatilityData');
+for (var stream in volatility) {
+  volatility[stream].on('update', function(data) {
+    io.of('/BTC/USD/' + this).emit('update', data);
+  }.bind(stream));
+  io.of('BTC/USD/' + stream).on('connection', function(socket) {
+    socket.emit('update', volatility[this].get());
+  }.bind(stream));
+}
 
 // Volume
 var volumeData = require('./db/volumeData');
 volumeData.on('update', function(data) {
-  io.of('/BTC/USD/volume').emit('update', data);
+  io.of('BTC/USD/volume').emit('update', data);
 });
-io.of('/BTC/USD/volume').on('connection', function(socket) {
+io.of('BTC/USD/volume').on('connection', function(socket) {
   socket.emit('update', volumeData.get());
 });
 
@@ -67,11 +69,10 @@ io.of('BTC/USD/priceDistribution').on('connection', function(socket) {
 // Price Charts
 var priceCharts = require('./db/priceCharts/priceCharts');
 for (var chart in priceCharts) {
-  var path = 'BTC/USD/priceCharts/';
   priceCharts[chart].on('update', function(data) {
-    io.of(path + this).emit('update', data);
+    io.of('BTC/USD/priceCharts/' + this).emit('update', data);
   }.bind(chart));
-  io.of(path + chart).on('connection', function(socket) {
+  io.of('BTC/USD/priceCharts/' + chart).on('connection', function(socket) {
     socket.emit('update', priceCharts[this].get());
   }.bind(chart));
 }

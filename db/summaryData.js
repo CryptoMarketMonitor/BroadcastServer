@@ -102,6 +102,7 @@ var getSummaryData = function() {
     .then(function(result) {
       data = result[0];
       data.standardDeviation = Math.sqrt(data.variance);
+      data.coefficientOfVariation = data.standardDeviation / data.vwap;
       summaryData.emit('update', data);
       setTimeout(getSummaryData, updatePeriod);
     });
