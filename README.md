@@ -9,6 +9,8 @@ makes it easy to get data from many exchanges from one source in a
 standardized format. We are continueing to add support for new exchanges, 
 and plan to support additional currency pairs in the near future.
 
+Disclaimer: This software and its associated data is provided as is, 
+with no guarantee of validity or accuracy.
 
 BroadcastServer
 ===============
