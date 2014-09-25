@@ -7,7 +7,7 @@ var PriceChart = function(minutesPerDataPoint, numDataPoints, updatePeriod) {
     this.updatePeriod = updatePeriod || 30*1000;
     this.data = {};
     this.minutesPerDataPoint = minutesPerDataPoint || 15;
-    this.numDataPoints = numDataPoints || 100;
+    this.numDataPoints = numDataPoints || 102;
     this.totalTime = this.numDataPoints * this.minutesPerDataPoint * 60 * 1000;
     this.getData();
 }
