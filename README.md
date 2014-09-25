@@ -1,10 +1,27 @@
+Crypto Market Monitor
+==============
+
+Our goal is to make market data more assessible and easily disseminated.
+One challenge to anyone wishing to do anything with bitcoin market data
+ (and any other cryptocurrency data for that matter), 
+is the variety of markets, each with their own protocols. btc Market Monitor
+makes it easy to get data from many exchanges from one source in a 
+standardized format. We are continueing to add support for new exchanges, 
+and plan to support additional currency pairs in the near future.
+
+
 BroadcastServer
 ===============
 
 Broadcasts cryptocurrency market data for consumption by client side applications.
 
 
-Url: http://broadcastserver.azurewebsites.net:80
+If there is any data you'd like to see added or any comments or critiques of our current
+data streams, please open an issue. We are always looking for feedback and any improvements
+we can make.
+
+
+Url: http://api.marketmonitor.io:80
 
 ----------
 Socket.io Channels
@@ -14,6 +31,7 @@ Socket.io Channels
 ----------
 
 Trades<br />
+Emits a trade event whenever a trade occurs and passes the associated trade data.<br />
 **/BTC/USD/trades**<br />
 Event: 'trade'<br />
 Data Format:
@@ -29,82 +47,58 @@ Data Format:
     }
  
 ----------
+
 Market Summary Statistics<br />
+Emits an object containing market summary statistics.<br />
 **/BTC/USD/summary**<br />
 Event: 'update'<br />
 Data Format:
-
     {
       vwap: Number,
       volume: Number,
       high: Number,
       low: Number,
       variance: Number,
+      standardDeviation: Number,
+      coefficientOfVariation: Number,
       range: Number,
       numTrades: Number
     }
 
-
 ----------
 
-
-Volatility Details<br />
-**/BTC/USD/volatility**<br />
+Price Over Time Chart Data<br />
+Emits an array of datapoints useful for making price over time charts.<br />
+**/BTC/USD/priceCharts/:timeframe**<br />
+Where timeframe is the timeframe of each datapoint. Options:<br />
+oneMinute<br />
+fiveMinutes<br />
+fifteenMinutes<br />
+oneHour<br />
 Event: 'update'<br />
-Data Format:
 
-    {
-      volatility: Number,
-      percentile: Number,
-      average: Number,
-      high: Number,
-      low: Number
-    }
-
-
-----------
-
-
-Range Details<br />
-**/BTC/USD/range**<br />
-Event: 'update'<br />
-Data Format:
-
-    {
-      range: Number,
-      percentile: Number,
-      average: Number,
-      high: Number,
-      low: Number
-    }
+    [
+      {
+        date; Date,
+        high: Number,
+        low: Number,
+        open: Number,
+        close: Number,
+        vwap: Number,
+        volume: Number,
+        numTrades: Number
+      }
+    ]
 
 
 ----------
-
-
-Volume Details<br />
-**/BTC/USD/volume**<br />
-Event: 'update'<br />
-Data Format:
-
-    {
-      volume: Number,
-      percentile: Number,
-      average: Number,
-      high: Number,
-      low: Number
-    }
-
-
-----------
-
 
 Price Distribution Chart Data<br />
+Emits an array of datapoints useful for making price distribution charts
 **/BTC/USD/priceDistribution**<br />
 Event: 'update'<br />
 Data Format:
 
-    // An array of datapoints
     [
       {
         exchange: String,
@@ -113,7 +107,6 @@ Data Format:
       },
       ...
     ]
-
 
 ----------
 Example Usage
@@ -128,34 +121,24 @@ Include Socket.io:
 Then:
 
     <script>
-      var trade = io('http://broadcastserver.azurewebsites.net/BTC/USD/trades');
+      var trade = io('http://api.marketmonitor.io:80/BTC/USD/trades');
       trade.on('trade', function(trade) {
         console.log('Trade:', trade);
       });
   
-      var summary = io('http://broadcastserver.azurewebsites.net:80/BTC/USD/summary');
+      var summary = io('http://api.marketmonitor.io:80/BTC/USD/summary');
       summary.on('update', function(data) {
         console.log('Summary Data', data);
       });
-  
-      var volatility = io('http://broadcastserver.azurewebsites.net:80/BTC/USD/volatility');
-      volatility.on('update', function(data) {
-        console.log('Volatility Details', data);
-      });
-  
-      var range = io('http://broadcastserver.azurewebsites.net:80/BTC/USD/range');
-      range.on('update', function(data) {
-        console.log('Range Details', data);
-      });
-  
-      var volume = io('http://broadcastserver.azurewebsites.net:80/BTC/USD/volume');
-      volume.on('update', function(data) {
-        console.log('Volume Details', data);
-      });
-  
-      var priceDistribution =
-        io('http://broadcastserver.azurewebsites.net:80/BTC/USD/priceDistribution');
-      priceDistribution.on('update', function(data) {
-        console.log('Price Distribution', data);
-      });
     </script>
+----------------
+
+Endpoints in progress:<br />
+<p>These endpoints are intended to give details or particular statistics including 
+highs, lows, averages, and percentiles. Current values are recalculated every 30
+seconds and daily values are used for highs, lows, and averages.</p>
+**/BTC/USD/standardDeviation**<br />
+**/BTC/USD/range**<br />
+**/BTC/USD/volume**<br />
+
+
