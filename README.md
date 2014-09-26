@@ -55,6 +55,7 @@ Emits an object containing market summary statistics.<br />
 **/BTC/USD/summary**<br />
 Event: 'update'<br />
 Data Format:
+
     {
       vwap: Number,
       volume: Number,
@@ -135,7 +136,9 @@ Then:
     </script>
 ----------------
 
-Endpoints in progress:<br />
+Endpoints in progress:
+==========
+
 <p>These endpoints are intended to give details or particular statistics including 
 highs, lows, averages, and percentiles. Current values are recalculated every 30
 seconds and daily values are used for highs, lows, and averages.</p>
