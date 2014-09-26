@@ -1,13 +1,13 @@
 Crypto Market Monitor
 ==============
 
-Our goal is to make market data more assessible and easily disseminated.
+The goal of the Crypto Market Monitor Project is to make market data more accessible.
 One challenge to anyone wishing to do anything with bitcoin market data
- (and any other cryptocurrency data for that matter), 
-is the variety of markets, each with their own protocols. btc Market Monitor
+ (and any other cryptocurrency data), 
+is the variety of markets. Each has their own api and data format. The Market Monitor project
 makes it easy to get data from many exchanges from one source in a 
-standardized format. We are continueing to add support for new exchanges, 
-and plan to support additional currency pairs in the near future.
+standardized format. We are planning on adding support for additional exchanges, 
+and additional currency pairs in the near future.
 
 Disclaimer: This software and its associated data is provided as is, 
 with no guarantee of validity or accuracy.
