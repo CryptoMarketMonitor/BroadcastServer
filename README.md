@@ -17,7 +17,7 @@ BroadcastServer
 
 Broadcasts cryptocurrency market data for consumption by client side applications.
 
-For example usage, see btc.marketmonitor.io
+For example usage, see [btc.marketmonitor.io] (http://btc.marketmonitor.io)
 
 If there is any data you'd like to see added or any comments or critiques of our current
 data streams, please open an issue. We are always looking for feedback and any improvements
