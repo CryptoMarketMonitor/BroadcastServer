@@ -17,6 +17,7 @@ BroadcastServer
 
 Broadcasts cryptocurrency market data for consumption by client side applications.
 
+For example usage, see btc.marketmonitor.io
 
 If there is any data you'd like to see added or any comments or critiques of our current
 data streams, please open an issue. We are always looking for feedback and any improvements
@@ -143,6 +144,7 @@ Endpoints in progress:
 highs, lows, averages, and percentiles. Current values are recalculated every 30
 seconds and daily values are used for highs, lows, and averages.</p>
 **/BTC/USD/standardDeviation**<br />
+**/BTC/USD/coefficientOfVariation**<br />
 **/BTC/USD/range**<br />
 **/BTC/USD/volume**<br />
 
