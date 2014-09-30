@@ -15,7 +15,9 @@ with no guarantee of validity or accuracy.
 BroadcastServer
 ===============
 
-Broadcasts cryptocurrency market data for consumption by client side applications.
+Broadcasts cryptocurrency market data.
+
+[NPM module] (https://www.npmjs.org/package/market-monitor)
 
 For example usage, see [btc.marketmonitor.io] (http://btc.marketmonitor.io)
 
