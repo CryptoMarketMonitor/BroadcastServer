@@ -100,7 +100,7 @@ Event: 'update'<br />
 ----------
 
 Price Distribution Chart Data<br />
-Emits an array of datapoints useful for making price distribution charts
+Emits an array of datapoints useful for making price distribution charts<br />
 **/BTC/USD/priceDistribution**<br />
 Event: 'update'<br />
 Data Format:
