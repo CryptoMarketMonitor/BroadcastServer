@@ -139,7 +139,7 @@ Then:
     </script>
 ----------------
 
-Endpoints in progress:
+Endpoints in progress
 ==========
 
 <p>These endpoints are intended to give details or particular statistics including 
@@ -150,4 +150,9 @@ seconds and daily values are used for highs, lows, and averages.</p>
 **/BTC/USD/range**<br />
 **/BTC/USD/volume**<br />
 
-
+Currently Supported Markets
+================
+- Bitstamp
+- BTC-e
+- hitbtc
+- Bitfinex
