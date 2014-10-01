@@ -28,14 +28,36 @@ we can make.
 
 Url: http://api.marketmonitor.io:80
 
-----------
+
+Getting Started
+============
+
+Install Socket.io:
+
+    // using npm
+    npm install socket.io-client --save
+    
+    // using bower
+    bower install socket.io-client --save
+    
+    // or load from cdn
+    <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
+    
+
+Then connect to a channel:
+
+    
+     var trade = io('http://api.marketmonitor.io:80/BTC/USD/trades');
+     trade.on('trade', function(trade) {
+       console.log('Trade:', trade);
+     });
+  
+
+
 Socket.io Channels
 ===============
 
-
-----------
-
-Trades<br />
+### Trades ###
 Emits a trade event whenever a trade occurs and passes the associated trade data.<br />
 **/BTC/USD/trades**<br />
 Event: 'trade'<br />
@@ -53,7 +75,7 @@ Data Format:
  
 ----------
 
-Market Summary Statistics<br />
+### Market Summary Statistics ###
 Emits an object containing market summary statistics.<br />
 **/BTC/USD/summary**<br />
 Event: 'update'<br />
@@ -73,7 +95,7 @@ Data Format:
 
 ----------
 
-Price Over Time Chart Data<br />
+### Price Over Time Chart Data ###
 Emits an array of datapoints useful for making price over time charts.<br />
 **/BTC/USD/priceCharts/:timeframe**<br />
 Where timeframe is the timeframe of each datapoint. Options:<br />
@@ -99,7 +121,7 @@ Event: 'update'<br />
 
 ----------
 
-Price Distribution Chart Data<br />
+### Price Distribution Chart Data ###
 Emits an array of datapoints useful for making price distribution charts<br />
 **/BTC/USD/priceDistribution**<br />
 Event: 'update'<br />
@@ -114,30 +136,6 @@ Data Format:
       ...
     ]
 
-----------
-Example Usage
-============
-
-Include Socket.io:
-    
-
-    <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
-    
-
-Then:
-
-    <script>
-      var trade = io('http://api.marketmonitor.io:80/BTC/USD/trades');
-      trade.on('trade', function(trade) {
-        console.log('Trade:', trade);
-      });
-  
-      var summary = io('http://api.marketmonitor.io:80/BTC/USD/summary');
-      summary.on('update', function(data) {
-        console.log('Summary Data', data);
-      });
-    </script>
-----------------
 
 Endpoints in progress
 ==========
