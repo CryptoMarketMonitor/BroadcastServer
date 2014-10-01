@@ -35,7 +35,10 @@ Getting Started
 Install Socket.io:
 
     // using npm
-    npm install socket.io --save
+    npm install socket.io-client --save
+    
+    // using bower
+    bower install socket.io-client --save
     
     // or load from cdn
     <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
