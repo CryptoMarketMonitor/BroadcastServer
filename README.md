@@ -28,7 +28,7 @@ we can make.
 
 Url: http://api.marketmonitor.io:80
 
-----------
+
 Getting Started
 ============
 
@@ -50,12 +50,9 @@ Then connect to a channel:
      });
   
 
-----------
+
 Socket.io Channels
 ===============
-
-
-----------
 
 ### Trades ###
 Emits a trade event whenever a trade occurs and passes the associated trade data.<br />
@@ -136,7 +133,6 @@ Data Format:
       ...
     ]
 
-----------------
 
 Endpoints in progress
 ==========
